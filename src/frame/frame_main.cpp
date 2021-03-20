@@ -112,11 +112,11 @@ Frame_Main::Frame_Main(void): Frame_Base(false) {
     _names->setTextDatum(CC_DATUM);
     
     for(int i = 0; i < 4; i++) {
-        _key[i] = new EPDGUI_Button("测试", 20 + i * 136, 90, KEY_W, KEY_H);
+        _key[i] = new EPDGUI_Button("Test", 20 + i * 136, 90, KEY_W, KEY_H);
     }
 
     for(int i = 0; i < 4; i++) {
-        _key[i + 4] = new EPDGUI_Button("测试", 20 + i * 136, 240, KEY_W, KEY_H);
+        _key[i + 4] = new EPDGUI_Button("Test", 20 + i * 136, 240, KEY_W, KEY_H);
     }
 
     _key[kKeySetting]->CanvasNormal()->pushImage(0, 0, 92, 92, ImageResource_main_icon_setting_92x92);
@@ -184,7 +184,7 @@ void Frame_Main::AppName(m5epd_update_mode_t mode) {
     }
     _names->setTextSize(20);
     _names->fillCanvas(0);
-    
+
     _names->drawString("WLAN", 20 + 46 + 3 * 136, 16);
     _names->drawString("Test", 20 + 46, 16);
     _names->drawString("Settings", 20 + 46 + 136, 16);
