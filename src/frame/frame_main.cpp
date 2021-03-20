@@ -185,7 +185,7 @@ void Frame_Main::AppName(m5epd_update_mode_t mode) {
     _names->setTextSize(20);
     _names->fillCanvas(0);
 
-    _names->drawString("WLAN", 20 + 46 + 3 * 136, 16);
+    _names->drawString("Wi-Fi", 20 + 46 + 3 * 136, 16);
     _names->drawString("Test", 20 + 46, 16);
     _names->drawString("Settings", 20 + 46 + 136, 16);
     _names->drawString("Keyboard", 20 + 46 + 2 * 136, 16);

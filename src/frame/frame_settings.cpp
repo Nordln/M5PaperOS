@@ -47,7 +47,7 @@ void key_synctime_cb(epdgui_args_vector_t &args) {
     info.setTextColor(0);
     info.setTextDatum(CC_DATUM);
     if(WiFi.status() != WL_CONNECTED) {
-        info.drawString("WLAN not connected", 150, 55);
+        info.drawString("Wi-Fi not connected", 150, 55);
         info.pushCanvas(120, 430, UPDATE_MODE_GL16);
         M5.EPD.WriteFullGram4bpp(GetWallpaper());
         title->pushCanvas(0, 8, UPDATE_MODE_NONE);

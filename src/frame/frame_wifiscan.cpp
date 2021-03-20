@@ -45,7 +45,7 @@ Frame_WifiScan::Frame_WifiScan(void) {
     }
  
     exitbtn("Home");
-    _canvas_title->drawString("WLAN", 270, 34);
+    _canvas_title->drawString("Wi-Fi", 270, 34);
 
     _key_exit->AddArgs(EPDGUI_Button::EVENT_RELEASED, 0, (void*)(&_is_run));
     _key_exit->Bind(EPDGUI_Button::EVENT_RELEASED, &Frame_Base::exit_cb);
