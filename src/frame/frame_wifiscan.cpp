@@ -208,7 +208,7 @@ void Frame_WifiScan::Connect() {
             anime_cnt = 0;
         }
 
-        if (millis() - start_time > 10000) {
+        if (millis() - start_time > 30000) {
             M5EPD_Canvas err(&M5.EPD);
             err.createCanvas(300, 100);
             err.fillCanvas(15);
@@ -239,7 +239,7 @@ void Frame_WifiScan::Connect() {
     _connected = 1;
 
     SetWifi(_connect_ssid, _connect_password);
-    // SyncNTPTime();
+    SyncNTPTime();
     scan();
 }
 
