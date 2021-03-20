@@ -78,7 +78,6 @@ void SysInit_Start(void) {
      } else {
         _initcanvas.loadFont(binaryttf, sizeof(binaryttf));
         SetTTFLoaded(false);
-        SetLanguage(LANGUAGE_EN);
         is_factory_test = true;
     }
 
@@ -95,12 +94,10 @@ void SysInit_Start(void) {
     Frame_FactoryTest *frame_factorytest = new Frame_FactoryTest();
     EPDGUI_AddFrame("Frame_FactoryTest", frame_factorytest);
     if(!is_factory_test) {
-        Frame_Setting *frame_setting = new Frame_Setting();
-        EPDGUI_AddFrame("Frame_Setting", frame_setting);
-        Frame_Setting_Wallpaper *frame_wallpaper = new Frame_Setting_Wallpaper();
-        EPDGUI_AddFrame("Frame_Setting_Wallpaper", frame_wallpaper);
-        Frame_Setting_Language *frame_language = new Frame_Setting_Language();
-        EPDGUI_AddFrame("Frame_Setting_Language", frame_language);
+        Frame_Settings *frame_setting = new Frame_Settings();
+        EPDGUI_AddFrame("Frame_Settings", frame_setting);
+        Frame_Settings_Wallpaper *frame_wallpaper = new Frame_Settings_Wallpaper();
+        EPDGUI_AddFrame("Frame_Settings_Wallpaper", frame_wallpaper);
         Frame_Keyboard *frame_keyboard = new Frame_Keyboard(0);
         EPDGUI_AddFrame("Frame_Keyboard", frame_keyboard);
         Frame_WifiScan *frame_wifiscan = new Frame_WifiScan();

@@ -4,10 +4,10 @@
 #include "frame_base.h"
 #include "../epdgui/epdgui.h"
 
-class Frame_Setting_Wallpaper : public Frame_Base {
+class Frame_Settings_Wallpaper : public Frame_Base {
 public:
-    Frame_Setting_Wallpaper();
-    ~Frame_Setting_Wallpaper();
+    Frame_Settings_Wallpaper();
+    ~Frame_Settings_Wallpaper();
     int init(epdgui_args_vector_t &args);
 
 private:

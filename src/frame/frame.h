@@ -2,8 +2,7 @@
 #define _FRAME_H_
 
 #include "frame_main.h"
-#include "frame_setting.h"
-#include "frame_setting_language.h"
+#include "frame_settings.h"
 #include "frame_setting_wallpaper.h"
 #include "frame_keyboard.h"
 #include "frame_factorytest.h"

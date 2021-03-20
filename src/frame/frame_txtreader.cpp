@@ -33,14 +33,7 @@ Frame_txtReader::Frame_txtReader(String path) {
     // _key_prev->AddArgs(EPDGUI_Button::EVENT_RELEASED, 0, &_key_operation);
     _key_prev->Bind(EPDGUI_Button::EVENT_RELEASED, key_prevpage_released_cb);
 
-    _language = GetLanguage();
-    if(_language == LANGUAGE_JA) {
-        exitbtn("戻る");
-     } else if(_language == LANGUAGE_ZH) {
-        exitbtn("返回");
-     } else {
-        exitbtn("Back");
-    }
+    exitbtn("Back");
 
     _canvas_title->drawString(path.substring(path.lastIndexOf("/") + 1, path.lastIndexOf(".")), 270, 34);
 

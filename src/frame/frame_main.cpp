@@ -1,5 +1,5 @@
 #include "frame_main.h"
-#include "frame_setting.h"
+#include "frame_settings.h"
 #include "frame_keyboard.h"
 #include "frame_factorytest.h"
 #include "frame_wifiscan.h"
@@ -23,10 +23,10 @@ enum {
 #define KEY_H 92
 
 void key_setting_cb(epdgui_args_vector_t &args) {
-    Frame_Base *frame = EPDGUI_GetFrame("Frame_Setting");
+    Frame_Base *frame = EPDGUI_GetFrame("Frame_Settings");
     if(frame == NULL) {
-        frame = new Frame_Setting();
-        EPDGUI_AddFrame("Frame_Setting", frame);
+        frame = new Frame_Settings();
+        EPDGUI_AddFrame("Frame_Settings", frame);
     }
     EPDGUI_PushFrame(frame);
     *((int*)(args[0])) = 0;
@@ -184,40 +184,18 @@ void Frame_Main::AppName(m5epd_update_mode_t mode) {
     }
     _names->setTextSize(20);
     _names->fillCanvas(0);
-    uint8_t language = GetLanguage();
+    
     _names->drawString("WLAN", 20 + 46 + 3 * 136, 16);
-    if(language == LANGUAGE_JA) {
-        _names->drawString("工場テスト", 20 + 46, 16);
-        _names->drawString("設定", 20 + 46 + 136, 16);
-        _names->drawString("鍵盤", 20 + 46 + 2 * 136, 16);
-     } else if(language == LANGUAGE_ZH) {
-        _names->drawString("出厂测试", 20 + 46, 16);
-        _names->drawString("设定", 20 + 46 + 136, 16);
-        _names->drawString("键盘", 20 + 46 + 2 * 136, 16);
-     } else {
-        _names->drawString("Test", 20 + 46, 16);
-        _names->drawString("Setting", 20 + 46 + 136, 16);
-        _names->drawString("Keyboard", 20 + 46 + 2 * 136, 16);
-    }
+    _names->drawString("Test", 20 + 46, 16);
+    _names->drawString("Settings", 20 + 46 + 136, 16);
+    _names->drawString("Keyboard", 20 + 46 + 2 * 136, 16);
     _names->pushCanvas(0, 186, mode);
     
     _names->fillCanvas(0);
-    if(language == LANGUAGE_JA) {
-        _names->drawString("メモリー", 20 + 46, 16);
-        _names->drawString("刷新比較", 20 + 46 + 136, 16);
-        _names->drawString("家", 20 + 46 + 2 * 136, 16);
-        _names->drawString("ライフゲーム", 20 + 46 + 3 * 136, 16);
-     } else if(language == LANGUAGE_ZH) {
-        _names->drawString("存储", 20 + 46, 16);
-        _names->drawString("刷新比较", 20 + 46 + 136, 16);
-        _names->drawString("家", 20 + 46 + 2 * 136, 16);
-        _names->drawString("生命游戏", 20 + 46 + 3 * 136, 16);
-     } else {
-        _names->drawString("Storage", 20 + 46, 16);
-        _names->drawString("Compare", 20 + 46 + 136, 16);
-        _names->drawString("Home", 20 + 46 + 2 * 136, 16);
-        _names->drawString("LifeGame", 20 + 46 + 3 * 136, 16);
-    }
+    _names->drawString("Storage", 20 + 46, 16);
+    _names->drawString("Compare", 20 + 46 + 136, 16);
+    _names->drawString("Home", 20 + 46 + 2 * 136, 16);
+    _names->drawString("LifeGame", 20 + 46 + 3 * 136, 16);
     _names->pushCanvas(0, 337, mode);
 }
 

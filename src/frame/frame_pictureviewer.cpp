@@ -16,14 +16,7 @@ Frame_PictureViewer::Frame_PictureViewer(String path) {
     _canvas_picture->setTextColor(0);
     _canvas_picture->setTextDatum(CC_DATUM);
  
-    uint8_t language = GetLanguage();
-    if(language == LANGUAGE_JA) {
-        exitbtn("戻る");
-     } else if(language == LANGUAGE_ZH) {
-        exitbtn("返回");
-     } else {
-        exitbtn("Back");
-    }
+    exitbtn("Back");
 
     _canvas_title->drawString(path.substring(path.lastIndexOf("/") + 1, path.lastIndexOf(".")), 270, 34);
 

@@ -13,8 +13,6 @@ enum {
     LANGUAGE_ZH // Simplified Chinese
 };
 
-void SetLanguage(uint8_t language);
-uint8_t GetLanguage(void);
 void SetWallpaper(uint16_t wallpaper_id);
 uint16_t GetWallpaperID(void);
 const uint8_t* GetWallpaper(void);

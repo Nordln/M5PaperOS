@@ -17,7 +17,6 @@ public:
 
 private:
     EPDGUI_Button *_key_wifi[14];
-    uint8_t _language;
     uint32_t _scan_count = 0;
     bool _connect;
     uint8_t _connected;
@@ -25,4 +24,4 @@ private:
     String _connect_password;
 };
 
-#endif //_FRAME_SETTING_H_
+#endif //_FRAME_SETTINGS_H_

@@ -44,17 +44,8 @@ Frame_WifiScan::Frame_WifiScan(void) {
         _key_wifi[i]->Bind(EPDGUI_Button::EVENT_RELEASED, key_wifi_cb);
     }
  
-    _language = GetLanguage();
-    if(_language == LANGUAGE_JA) {
-        exitbtn("ホーム");
-        _canvas_title->drawString("WLAN", 270, 34);
-     } else if(_language == LANGUAGE_ZH) {
-        exitbtn("主页");
-        _canvas_title->drawString("无线局域网", 270, 34);
-     } else {
-        exitbtn("Home");
-        _canvas_title->drawString("WLAN", 270, 34);
-    }
+    exitbtn("Home");
+    _canvas_title->drawString("WLAN", 270, 34);
 
     _key_exit->AddArgs(EPDGUI_Button::EVENT_RELEASED, 0, (void*)(&_is_run));
     _key_exit->Bind(EPDGUI_Button::EVENT_RELEASED, &Frame_Base::exit_cb);
@@ -182,13 +173,7 @@ int Frame_WifiScan::scan() {
     _key_wifi[wifi_num]->CanvasNormal()->fillCanvas(0);
     _key_wifi[wifi_num]->CanvasNormal()->drawRect(0, 0, 532, 61, 15);
     _key_wifi[wifi_num]->CanvasNormal()->pushImage(15, 14, 32, 32, ImageResource_item_icon_refresh_32x32);
-    if(_language == LANGUAGE_JA) {
-        _key_wifi[wifi_num]->CanvasNormal()->drawString("刷新", 58, 35);
-     } else if(_language == LANGUAGE_ZH) {
-        _key_wifi[wifi_num]->CanvasNormal()->drawString("刷新", 58, 35);
-     } else {
-        _key_wifi[wifi_num]->CanvasNormal()->drawString("Refresh", 58, 35);
-    }
+    _key_wifi[wifi_num]->CanvasNormal()->drawString("Refresh", 58, 35);
     *(_key_wifi[wifi_num]->CanvasPressed()) = *(_key_wifi[wifi_num]->CanvasNormal());
     _key_wifi[wifi_num]->CanvasPressed()->ReverseColor();
     _key_wifi[wifi_num]->Draw(UPDATE_MODE_A2);
@@ -230,13 +215,7 @@ void Frame_WifiScan::Connect() {
             err.setTextSize(26);
             err.setTextColor(0);
             err.setTextDatum(CC_DATUM);
-            if(_language == LANGUAGE_JA) {
-                err.drawString("パスワードが違います", 150, 55);
-             } else if(_language == LANGUAGE_ZH) {
-                err.drawString("密码错误", 150, 55);
-             } else {
-                err.drawString("Wrong password", 150, 55);
-            }
+            err.drawString("Wrong password", 150, 55);
             err.pushCanvas(120, 430, UPDATE_MODE_GL16);
             return;
         }

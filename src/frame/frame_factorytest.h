@@ -26,7 +26,6 @@ private:
     M5EPD_Canvas *_canvas_pos;
     M5EPD_Canvas *_canvas_btn;
     M5EPD_Canvas *_canvas_pass;
-    uint8_t _language;
     uint32_t _time;
     uint8_t _btn;
     bool _psram_success;

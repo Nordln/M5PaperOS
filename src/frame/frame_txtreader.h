@@ -16,7 +16,6 @@ public:
 private:
     EPDGUI_Button *_key_next;
     EPDGUI_Button *_key_prev;
-    uint8_t _language;
     uint16_t _text_size = 32;
     M5EPD_Canvas *_canvas_prev;
     M5EPD_Canvas *_canvas_current;

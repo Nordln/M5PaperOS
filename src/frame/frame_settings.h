@@ -1,19 +1,18 @@
-#ifndef _FRAME_SETTING_H_
-#define _FRAME_SETTING_H_
+#ifndef _FRAME_SETTINGS_H_
+#define _FRAME_SETTINGS_H_
 
 #include "frame_base.h"
 #include "../epdgui/epdgui.h"
 
-class Frame_Setting : public Frame_Base {
+class Frame_Settings : public Frame_Base {
 public:
-    Frame_Setting();
-    ~Frame_Setting();
+    Frame_Settings();
+    ~Frame_Settings();
     int init(epdgui_args_vector_t &args);
 
 
 private:
     EPDGUI_Button *_key_wallpaper;
-    EPDGUI_Button *_key_language;
     EPDGUI_Button *_key_shutdown;
     EPDGUI_Button *_key_restart;
     EPDGUI_Button *_key_syncntp;
@@ -25,4 +24,4 @@ private:
     M5EPD_Canvas *_timezone_canvas;
 };
 
-#endif //_FRAME_SETTING_H_
+#endif //_FRAME_SETTINGS_H_

@@ -35,16 +35,9 @@ Frame_FileIndex::Frame_FileIndex(String path) {
     _frame_name = "Frame_FileIndex";
     _path = path;
 
-    uint8_t language = GetLanguage();
     _canvas_title->setTextDatum(CR_DATUM);
     if (path == "/") {
-        if (language == LANGUAGE_JA) {
-            exitbtn("ホーム");
-         } else if (language == LANGUAGE_ZH) {
-            exitbtn("主页");
-         } else {
-            exitbtn("Home");
-        }
+        exitbtn("Home");
         _canvas_title->drawString("SD/", 540 - 15, 34);
      } else {
         String parent_directory = path.substring(0, path.lastIndexOf("/"));

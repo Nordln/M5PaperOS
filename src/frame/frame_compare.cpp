@@ -74,20 +74,9 @@ Frame_Compare::Frame_Compare(void) {
     _canvas_time->setTextSize(26);
     _canvas_time->setTextDatum(CR_DATUM);
 
-    uint8_t language = GetLanguage();
-    if(language == LANGUAGE_JA) {
-        exitbtn("ホーム");
-        _canvas_title->drawString("比較", 270, 34);
-        _key_updatemode[UPDATE_MODE_INIT] = new EPDGUI_Button("リセット", 4, 88, 532, 60);
-     } else if(language == LANGUAGE_ZH) {
-        exitbtn("主页");
-        _canvas_title->drawString("比较", 270, 34);
-        _key_updatemode[UPDATE_MODE_INIT] = new EPDGUI_Button("全部重置", 4, 88, 532, 60);
-     } else {
-        exitbtn("Home");
-        _canvas_title->drawString("Compare", 270, 34);
-        _key_updatemode[UPDATE_MODE_INIT] = new EPDGUI_Button("Reset all", 4, 88, 532, 60);
-    }
+    exitbtn("Home");
+    _canvas_title->drawString("Compare", 270, 34);
+    _key_updatemode[UPDATE_MODE_INIT] = new EPDGUI_Button("Reset all", 4, 88, 532, 60);
 
     _key_updatemode[UPDATE_MODE_INIT]->Bind(EPDGUI_Button::EVENT_RELEASED, key_update_reset_cb);
 
