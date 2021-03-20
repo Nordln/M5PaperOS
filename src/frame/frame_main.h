@@ -3,8 +3,7 @@
 
 #include "frame_base.h"
 
-class Frame_Main : public Frame_Base
-{
+class Frame_Main : public Frame_Base {
 public:
     Frame_Main();
     ~Frame_Main();

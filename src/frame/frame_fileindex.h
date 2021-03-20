@@ -5,8 +5,7 @@
 #include "../epdgui/epdgui.h"
 #include <SD.h>
 
-class Frame_FileIndex : public Frame_Base
-{
+class Frame_FileIndex : public Frame_Base {
 public:
     Frame_FileIndex(String path);
     ~Frame_FileIndex();

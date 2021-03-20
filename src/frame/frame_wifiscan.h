@@ -4,8 +4,7 @@
 #include "frame_base.h"
 #include "../epdgui/epdgui.h"
 
-class Frame_WifiScan : public Frame_Base
-{
+class Frame_WifiScan : public Frame_Base {
 public:
     Frame_WifiScan();
     ~Frame_WifiScan();

@@ -3,8 +3,7 @@
 
 #include "epdgui_base.h"
 
-class EPDGUI_Textbox : public EPDGUI_Base
-{
+class EPDGUI_Textbox : public EPDGUI_Base {
 public:
     static const int16_t EVENT_NONE = 0;
     static const int16_t EVENT_PRESSED = 1;

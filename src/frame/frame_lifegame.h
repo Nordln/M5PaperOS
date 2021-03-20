@@ -4,8 +4,7 @@
 #include "frame_base.h"
 #include "../epdgui/epdgui.h"
 
-class Frame_Lifegame : public Frame_Base
-{
+class Frame_Lifegame : public Frame_Base {
 public:
     Frame_Lifegame();
     ~Frame_Lifegame();

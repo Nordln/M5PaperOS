@@ -4,8 +4,7 @@
 #include "frame_base.h"
 #include "../epdgui/epdgui.h"
 
-class Frame_FactoryTest : public Frame_Base
-{
+class Frame_FactoryTest : public Frame_Base {
 public:
     Frame_FactoryTest();
     ~Frame_FactoryTest();

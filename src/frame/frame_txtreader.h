@@ -5,8 +5,7 @@
 #include "../epdgui/epdgui.h"
 #include "SD.h"
 
-class Frame_txtReader : public Frame_Base
-{
+class Frame_txtReader : public Frame_Base {
 public:
     Frame_txtReader(String path);
     ~Frame_txtReader();

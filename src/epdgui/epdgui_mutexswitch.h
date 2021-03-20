@@ -4,8 +4,7 @@
 #include "epdgui_switch.h"
 #include <list>
 
-class EPDGUI_MutexSwitch : public EPDGUI_Base
-{
+class EPDGUI_MutexSwitch : public EPDGUI_Base {
 public:
     EPDGUI_MutexSwitch();
     

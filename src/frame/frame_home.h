@@ -4,8 +4,7 @@
 #include "frame_base.h"
 #include "../epdgui/epdgui.h"
 
-class Frame_Home : public Frame_Base
-{
+class Frame_Home : public Frame_Base {
 public:
     Frame_Home();
     ~Frame_Home();

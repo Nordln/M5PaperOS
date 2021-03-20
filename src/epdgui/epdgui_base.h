@@ -8,8 +8,7 @@
 
 typedef std::vector<void*> epdgui_args_vector_t;
 
-class EPDGUI_Base
-{
+class EPDGUI_Base {
 public:
     EPDGUI_Base(int16_t x, int16_t y, int16_t w, int16_t h);
     EPDGUI_Base();

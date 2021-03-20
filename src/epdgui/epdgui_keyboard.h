@@ -4,8 +4,7 @@
 #include "epdgui_button.h"
 #include "epdgui_switch.h"
 
-class EPDGUI_Keyboard: public EPDGUI_Base
-{
+class EPDGUI_Keyboard: public EPDGUI_Base {
 public:
     static const uint32_t STYLE_INPUTMODE_NORMALTEXT = 0x00000001;
     static const uint32_t STYLE_INPUTMODE_NEEDCONFIRM = 0x00000002;

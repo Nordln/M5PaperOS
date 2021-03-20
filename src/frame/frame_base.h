@@ -6,8 +6,7 @@
 #include "../global_setting.h"
 #include "../resources/ImageResource.h"
 
-class Frame_Base
-{
+class Frame_Base {
 public:
     Frame_Base(bool _has_title = true);
     void exitbtn(String title, uint16_t width = 150);

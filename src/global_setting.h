@@ -7,8 +7,7 @@
 
 #define WALLPAPER_NUM 3
 
-enum
-{
+enum {
     LANGUAGE_EN = 0,    // default, English
     LANGUAGE_JA, // Japanese
     LANGUAGE_ZH // Simplified Chinese

@@ -5,8 +5,7 @@
 
 #define EPDGUI_SWITCH_MAX_STATE 5
 
-class EPDGUI_Switch: public EPDGUI_Base
-{
+class EPDGUI_Switch: public EPDGUI_Base {
 public:
     static const int16_t EVENT_NONE = 0;
     static const int16_t EVENT_PRESSED = 1;

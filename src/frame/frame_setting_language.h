@@ -4,8 +4,7 @@
 #include "frame_base.h"
 #include "../epdgui/epdgui.h"
 
-class Frame_Setting_Language : public Frame_Base
-{
+class Frame_Setting_Language : public Frame_Base {
 public:
     Frame_Setting_Language();
     ~Frame_Setting_Language();
