@@ -101,7 +101,7 @@ void Frame_FactoryTest::drawItem(uint16_t flag, const char* str, int y) {
 void Frame_FactoryTest::drawItem(m5epd_update_mode_t mode) {
     
     _canvas_base->fillCanvas(0);
-    drawItem(0x0001, "1.day", 30);
+    drawItem(0x0001, "1.Date", 30);
     drawItem(0x0002, "2.Time", 90);
     drawItem(0x0004, "3.Temperature", 150);
     drawItem(0x0008, "4.Humidity", 210);
