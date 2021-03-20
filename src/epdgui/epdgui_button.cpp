@@ -133,11 +133,11 @@ void EPDGUI_Button::setBMPButton(String label_l, String label_r, const uint8_t *
     _CanvasNormal->setTextColor(15);
     if(label_l.length()) {
         _CanvasNormal->setTextDatum(CL_DATUM);
-        _CanvasNormal->drawString(label_l, 47 + 8, (_h >> 1) + 5);
+        _CanvasNormal->drawString(label_l, 47 + 8, (_h >> 1) + 2); // Default: (_h >> 1) + 5
     }
     if(label_r.length()) {
         _CanvasNormal->setTextDatum(CR_DATUM);
-        _CanvasNormal->drawString(label_r, _w - 15, (_h >> 1) + 5);
+        _CanvasNormal->drawString(label_r, _w - 15, (_h >> 1)); // Default: (_h >> 1) + 5
     }
     _CanvasNormal->pushImage(15, (_h >> 1) - 16, 32, 32, bmp32x32);
     *(_CanvasPressed) = *(_CanvasNormal);
