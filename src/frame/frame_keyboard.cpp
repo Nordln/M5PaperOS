@@ -39,26 +39,18 @@ void key_textsize_reset_cb(epdgui_args_vector_t &args) {
     ((EPDGUI_Textbox*)(args[0]))->SetTextSize(textsize);
 }
 
-Frame_Keyboard::Frame_Keyboard(bool isHorizontal) : Frame_Base() {
+Frame_Keyboard::Frame_Keyboard() : Frame_Base() {
     _frame_name = "Frame_Keyboard";
-    if(isHorizontal) {
-        inputbox = new EPDGUI_Textbox(84, 25, 712, 250);
-        key_textclear = new EPDGUI_Button("CLR", 804, 25, 72, 120);
-        key_textsize_plus = new EPDGUI_Button("+", 804, 157, 72, 40);
-        key_textsize_reset = new EPDGUI_Button("26", 804, 196, 72, 40);
-        key_textsize_minus = new EPDGUI_Button("-", 804, 235, 72, 40);
-     } else {
-        const uint16_t kKeyBaseY = 628;
-        inputbox = new EPDGUI_Textbox(4, 100, 532, 512);
-        key_textclear = new EPDGUI_Button("CLR", 4, kKeyBaseY, 260, 52);
-        key_textsize_plus = new EPDGUI_Button("+", 448, kKeyBaseY, 88, 52);
-        key_textsize_reset = new EPDGUI_Button("26", 360, kKeyBaseY, 88, 52);
-        key_textsize_minus = new EPDGUI_Button("-", 272, kKeyBaseY, 88, 52);
-    }
+    const uint16_t kKeyBaseY = 628;
+    inputbox = new EPDGUI_Textbox(4, 100, 532, 512);
+    key_textclear = new EPDGUI_Button("CLR", 4, kKeyBaseY, 260, 52);
+    key_textsize_plus = new EPDGUI_Button("+", 448, kKeyBaseY, 88, 52);
+    key_textsize_reset = new EPDGUI_Button("26", 360, kKeyBaseY, 88, 52);
+    key_textsize_minus = new EPDGUI_Button("-", 272, kKeyBaseY, 88, 52);
     
     inputbox->SetState(EPDGUI_Textbox::EVENT_PRESSED);
 
-    keyboard = new EPDGUI_Keyboard(isHorizontal);
+    keyboard = new EPDGUI_Keyboard();
     
     key_textclear->AddArgs(EPDGUI_Button::EVENT_RELEASED, 0, (void*)inputbox);
     key_textclear->Bind(EPDGUI_Button::EVENT_RELEASED, key_textclear_cb);

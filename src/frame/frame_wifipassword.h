@@ -6,7 +6,7 @@
 
 class Frame_WifiPassword : public Frame_Base {
 public:
-    Frame_WifiPassword(bool isHorizontal = false);
+    Frame_WifiPassword();
     ~Frame_WifiPassword();
     int run();
     int init(epdgui_args_vector_t &args);

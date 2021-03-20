@@ -6,21 +6,16 @@ void key_passwordclear_cb(epdgui_args_vector_t &args) {
 }
 
 
-Frame_WifiPassword::Frame_WifiPassword(bool isHorizontal) : Frame_Base() {
+Frame_WifiPassword::Frame_WifiPassword() : Frame_Base() {
     _frame_name = "Frame_WifiPassword";
-    if(isHorizontal) {
-        inputbox = new EPDGUI_Textbox(84, 25, 712, 250);
-        key_textclear = new EPDGUI_Button("CLR", 804, 25, 72, 120);
-     } else {
-        const uint16_t kKeyBaseY = 176;
-        inputbox = new EPDGUI_Textbox(4, 100, 532, 60);
-        key_textclear = new EPDGUI_Button("CLR", 4, kKeyBaseY, 260, 52);
-    }
+    const uint16_t kKeyBaseY = 176;
+    inputbox = new EPDGUI_Textbox(4, 100, 532, 60);
+    key_textclear = new EPDGUI_Button("CLR", 4, kKeyBaseY, 260, 52);
     
     inputbox->SetTextMargin(8, 15, 8, 8);
     inputbox->SetState(EPDGUI_Textbox::EVENT_PRESSED);
 
-    keyboard = new EPDGUI_Keyboard(isHorizontal, EPDGUI_Keyboard::STYLE_INPUTMODE_NEEDCONFIRM);
+    keyboard = new EPDGUI_Keyboard(EPDGUI_Keyboard::STYLE_INPUTMODE_NEEDCONFIRM);
     
     key_textclear->AddArgs(EPDGUI_Button::EVENT_RELEASED, 0, (void*)inputbox);
     key_textclear->Bind(EPDGUI_Button::EVENT_RELEASED, key_passwordclear_cb);

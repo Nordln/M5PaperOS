@@ -98,7 +98,7 @@ void SysInit_Start(void) {
         EPDGUI_AddFrame("Frame_Settings", frame_setting);
         Frame_Settings_Wallpaper *frame_wallpaper = new Frame_Settings_Wallpaper();
         EPDGUI_AddFrame("Frame_Settings_Wallpaper", frame_wallpaper);
-        Frame_Keyboard *frame_keyboard = new Frame_Keyboard(0);
+        Frame_Keyboard *frame_keyboard = new Frame_Keyboard();
         EPDGUI_AddFrame("Frame_Keyboard", frame_keyboard);
         Frame_WifiScan *frame_wifiscan = new Frame_WifiScan();
         EPDGUI_AddFrame("Frame_WifiScan", frame_wifiscan);

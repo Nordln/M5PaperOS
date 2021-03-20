@@ -21,7 +21,7 @@ void key_wifi_cb(epdgui_args_vector_t &args) {
         _connect_key = (EPDGUI_Button*)(args[0]);
         Frame_Base *frame = EPDGUI_GetFrame("Frame_WifiPassword");
         if(frame == NULL) {
-            frame = new Frame_WifiPassword(false);
+            frame = new Frame_WifiPassword();
             EPDGUI_AddFrame("Frame_WifiPassword", frame);
         }
         EPDGUI_PushFrame(frame);

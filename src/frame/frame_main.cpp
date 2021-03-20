@@ -35,7 +35,7 @@ void key_setting_cb(epdgui_args_vector_t &args) {
 void key_keyboard_cb(epdgui_args_vector_t &args) {
     Frame_Base *frame = EPDGUI_GetFrame("Frame_Keyboard");
     if(frame == NULL) {
-        frame = new Frame_Keyboard(0);
+        frame = new Frame_Keyboard();
         EPDGUI_AddFrame("Frame_Keyboard", frame);
     }
     EPDGUI_PushFrame(frame);

@@ -11,7 +11,7 @@ public:
     static const uint32_t STYLE_DEFAULT = STYLE_INPUTMODE_NORMALTEXT;
 
 public:
-    EPDGUI_Keyboard(int16_t dir = 1, uint32_t style = STYLE_DEFAULT);
+    EPDGUI_Keyboard(uint32_t style = STYLE_DEFAULT);
     ~EPDGUI_Keyboard();
     void Draw(m5epd_update_mode_t mode = UPDATE_MODE_DU4);
     void Draw(M5EPD_Canvas* canvas);
@@ -21,8 +21,8 @@ public:
 
 private:
     EPDGUI_Button *_btn[29];
-    EPDGUI_Switch *_sw[3];
-    EPDGUI_Base *_key[32];
+    EPDGUI_Switch *_sw[2];
+    EPDGUI_Base *_key[31];
     String _data;
     uint8_t _layout = 0;
 

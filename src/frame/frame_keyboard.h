@@ -6,7 +6,7 @@
 
 class Frame_Keyboard : public Frame_Base {
 public:
-    Frame_Keyboard(bool isHorizontal = false);
+    Frame_Keyboard();
     ~Frame_Keyboard();
     int run();
     int init(epdgui_args_vector_t &args);
