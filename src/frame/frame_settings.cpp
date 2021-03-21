@@ -134,6 +134,7 @@ Frame_Settings::Frame_Settings(void) {
     _timezone_canvas->setTextSize(26);
     _timezone_canvas->setTextColor(15);
     _timezone_canvas->setTextDatum(CL_DATUM);
+    _timezone_canvas->drawRect(0, 0, 540, 60, 15);
  
     _key_wifi = new EPDGUI_Button(4, 100, 532, 61);
     _key_wallpaper = new EPDGUI_Button(4, 160, 532, 61);
@@ -141,13 +142,13 @@ Frame_Settings::Frame_Settings(void) {
     _key_restart = new EPDGUI_Button(4, 320, 532, 61);
     _key_shutdown = new EPDGUI_Button(4, 380, 532, 61);
 
-    key_timezone_plus = new EPDGUI_Button("+", 448, kTimeZoneY, 88, 52);
+    key_timezone_plus = new EPDGUI_Button("+", 448, kTimeZoneY + 2, 88, 52);
     String str = String(GetTimeZone());
     if (GetTimeZone() > 0) {
         str = "+" + str;
     }
-    key_timezone_reset = new EPDGUI_Button(str, 360, kTimeZoneY, 88, 52);
-    key_timezone_minus = new EPDGUI_Button("-", 272, kTimeZoneY, 88, 52);
+    key_timezone_reset = new EPDGUI_Button(str, 360, kTimeZoneY + 2, 88, 52);
+    key_timezone_minus = new EPDGUI_Button("–", 272, kTimeZoneY + 2, 88, 52);
     
     key_timezone_plus->AddArgs(EPDGUI_Button::EVENT_RELEASED, 0, &_timezone);
     key_timezone_plus->AddArgs(EPDGUI_Button::EVENT_RELEASED, 1, key_timezone_reset);
@@ -166,7 +167,7 @@ Frame_Settings::Frame_Settings(void) {
     _key_syncntp->setBMPButton("  Sync Time", "", ImageResource_item_icon_ntptime_32x32);
     _key_restart->setBMPButton("  Restart", "", ImageResource_item_icon_restart_32x32);
     _key_shutdown->setBMPButton("  Shutdown", "", ImageResource_item_icon_shutdown_32x32);
-    _timezone_canvas->drawString("Time zone (UTC)", 15, 35);
+    _timezone_canvas->drawString("Time Zone (UTC)", 15, 35);
     exitbtn("Home");
     _canvas_title->drawString("Settings", 270, 34);
 
