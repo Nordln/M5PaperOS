@@ -210,23 +210,27 @@ void Frame_Main::StatusBar(m5epd_update_mode_t mode) {
     _bar->drawString("M5Paper", 10, 27);
 
     // Wi-Fi
-    const uint8_t *kIMGWifiLevel[4] = {
-        NULL,
-        ImageResource_item_icon_wifi_1_32x32,
-        ImageResource_item_icon_wifi_2_32x32,
-        ImageResource_item_icon_wifi_3_32x32
-    };
-    if (WiFi.status() == WL_CONNECTED) {
-        int rssi = WiFi.RSSI();
-        int level = 0;
-        if (rssi > -55) {
-            level = 3;
-        } else if (rssi > -88) {
-            level = 2;
-        } else {
-            level = 1;
-        }
-        _bar->pushImage(134, 8, 32, 32, kIMGWifiLevel[level]);
+    if (isWiFiConfiged()) {
+        const uint8_t *kIMGWifiLevel[4] = {
+            NULL,
+            ImageResource_item_icon_wifi_1_32x32,
+            ImageResource_item_icon_wifi_2_32x32,
+            ImageResource_item_icon_wifi_3_32x32
+        };
+        if (WiFi.status() == WL_CONNECTED) {
+            int rssi = WiFi.RSSI();
+            int level = 0;
+            if (rssi > -55) {
+                level = 3;
+            } else if (rssi > -88) {
+                level = 2;
+            } else {
+                level = 1;
+            }
+            _bar->pushImage(134, 8, 32, 32, kIMGWifiLevel[level]);
+        } /* else {
+            WiFi.begin(GetWifiSSID(), GetWifiPassword())
+        } */
     }
 
     // Battery

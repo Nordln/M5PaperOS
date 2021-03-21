@@ -153,7 +153,7 @@ void Frame_FactoryTest::drawPassCount(m5epd_update_mode_t mode) {
 
 void Frame_FactoryTest::scan(String *ssid, int32_t *rssi) {
     WiFi.mode(WIFI_STA);
-    WiFi.disconnect();
+    // WiFi.disconnect();
     WiFi.scanNetworks(true);
 
     int wifi_num;

@@ -127,7 +127,7 @@ int Frame_Settings_Wifi::scan() {
             }
         }
         if (connect_wifi_idx == -1) {
-            WiFi.disconnect();
+            // WiFi.disconnect();
             _key_wifi[0]->SetEnable(true);
             _connected = 0;
             for (int i = 1; i < MAX_BTN_NUM; i++) {
