@@ -5,7 +5,7 @@
 
 #define MAX_BTN_NUM     14
 
-void key_fileindex_floder_cb(epdgui_args_vector_t &args) {
+void key_fileindex_folder_cb(epdgui_args_vector_t &args) {
     Frame_Base *frame = new Frame_FileIndex(((EPDGUI_Button*)(args[0]))->GetCustomString());
     EPDGUI_PushFrame(frame);
     *((int*)(args[1])) = 0;
@@ -65,24 +65,24 @@ void Frame_FileIndex::listDir(fs::FS &fs, const char *dirname) {
         return;
     }
 
-    std::vector<File> floders;
+    std::vector<File> folders;
     std::vector<File> files;
 
     File file = root.openNextFile();
     while (file) {
         if (file.isDirectory()) {
-            floders.push_back(file);
+            folders.push_back(file);
          } else {
             files.push_back(file);
         }
         file = root.openNextFile();
     }
 
-    for (int n = 0; n < floders.size(); n++) {
+    for (int n = 0; n < folders.size(); n++) {
         if (_key_files.size() > MAX_BTN_NUM) {
             break;
         }
-        File file = floders[n];
+        File file = folders[n];
         EPDGUI_Button *btn = new EPDGUI_Button(4, 100 + _key_files.size() * 60, 532, 61);
         _key_files.push_back(btn);
 
@@ -99,14 +99,14 @@ void Frame_FileIndex::listDir(fs::FS &fs, const char *dirname) {
         btn->CanvasNormal()->drawString(filename, 47 + 13, 35);
         btn->SetCustomString(file.name());
         btn->CanvasNormal()->setTextDatum(CR_DATUM);
-        btn->CanvasNormal()->pushImage(15, 14, 32, 32, ImageResource_item_icon_file_floder_32x32);
+        btn->CanvasNormal()->pushImage(15, 14, 32, 32, ImageResource_item_icon_file_folder_32x32);
         btn->CanvasNormal()->pushImage(532 - 15 - 32, 14, 32, 32, ImageResource_item_icon_arrow_r_32x32);
         *(btn->CanvasPressed()) = *(btn->CanvasNormal());
         btn->CanvasPressed()->ReverseColor();
 
         btn->AddArgs(EPDGUI_Button::EVENT_RELEASED, 0, btn);
         btn->AddArgs(EPDGUI_Button::EVENT_RELEASED, 1, (void*)(&_is_run));
-        btn->Bind(EPDGUI_Button::EVENT_RELEASED, key_fileindex_floder_cb);
+        btn->Bind(EPDGUI_Button::EVENT_RELEASED, key_fileindex_folder_cb);
     }
 
     for (int n = 0; n < files.size(); n++) {
