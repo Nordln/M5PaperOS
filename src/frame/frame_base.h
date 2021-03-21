@@ -9,7 +9,7 @@
 class Frame_Base {
 public:
     Frame_Base(bool _has_title = true);
-    void exitbtn(String title, uint16_t width = 150);
+    void exitbtn(String title, uint16_t width = 180);
     virtual ~Frame_Base();
     virtual int run();
     virtual void exit();
