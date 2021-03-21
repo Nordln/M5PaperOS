@@ -2,10 +2,10 @@
 
 void UpdateCompareCanvasDraw(uint8_t mode, M5EPD_Canvas *update_canvas) {
     update_canvas->fillCanvas(0);
-    for(int i = 0; i < 16; i++) {
+    for (int i = 0; i < 16; i++) {
         update_canvas->fillRect(i * 27, 0, 27, 50, i);
     }
-    switch(mode) {
+    switch (mode) {
         case UPDATE_MODE_INIT : {
             update_canvas->drawString("Display initialization", 8, 60);
             break;
@@ -80,7 +80,7 @@ Frame_Compare::Frame_Compare(void) {
 
     _key_updatemode[UPDATE_MODE_INIT]->Bind(EPDGUI_Button::EVENT_RELEASED, key_update_reset_cb);
 
-    for(int i = 1; i < 8; i++) {
+    for (int i = 1; i < 8; i++) {
         _key_updatemode[i] = new EPDGUI_Button(0, 168 + (i-1) * 108, 100, 100);
         char buf[10];
         sprintf(buf, "%d", i);
@@ -104,17 +104,17 @@ Frame_Compare::Frame_Compare(void) {
 }
 
 Frame_Compare::~Frame_Compare(void) {
-    for(int i = 0; i < 8; i++) {
+    for (int i = 0; i < 8; i++) {
         delete _key_updatemode[i];
     }
     delete _canvas;
 }
 
 int Frame_Compare::run() {
-    switch(_update_flag) {
+    switch (_update_flag) {
         case 1: {
             _update_flag = 0;
-            for(int i = 1; i < 8; i++) {
+            for (int i = 1; i < 8; i++) {
                 UpdateCompareCanvasDraw(i, _canvas);
                 _canvas->pushCanvas(104, 168 + (i-1) * 108, (m5epd_update_mode_t)i);
             }
@@ -130,7 +130,7 @@ int Frame_Compare::init(epdgui_args_vector_t &args) {
     M5.EPD.Clear();
     _canvas_title->pushCanvas(0, 8, UPDATE_MODE_NONE);
     EPDGUI_AddObject(_key_exit);
-    for(int i = 0; i < 8; i++) {
+    for (int i = 0; i < 8; i++) {
         EPDGUI_AddObject(_key_updatemode[i]);
     }
     EPDGUI_SetAutoUpdate(false);

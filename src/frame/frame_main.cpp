@@ -2,11 +2,11 @@
 #include "frame_settings.h"
 #include "frame_keyboard.h"
 #include "frame_factorytest.h"
-#include "frame_wifiscan.h"
 #include "frame_lifegame.h"
 #include "frame_fileindex.h"
 #include "frame_compare.h"
 #include "frame_home.h"
+#include <WiFi.h>
 
 enum {
     kKeyFactoryTest = 0,
@@ -24,7 +24,7 @@ enum {
 
 void key_setting_cb(epdgui_args_vector_t &args) {
     Frame_Base *frame = EPDGUI_GetFrame("Frame_Settings");
-    if(frame == NULL) {
+    if (frame == NULL) {
         frame = new Frame_Settings();
         EPDGUI_AddFrame("Frame_Settings", frame);
     }
@@ -34,7 +34,7 @@ void key_setting_cb(epdgui_args_vector_t &args) {
 
 void key_keyboard_cb(epdgui_args_vector_t &args) {
     Frame_Base *frame = EPDGUI_GetFrame("Frame_Keyboard");
-    if(frame == NULL) {
+    if (frame == NULL) {
         frame = new Frame_Keyboard();
         EPDGUI_AddFrame("Frame_Keyboard", frame);
     }
@@ -44,7 +44,7 @@ void key_keyboard_cb(epdgui_args_vector_t &args) {
 
 void key_factorytest_cb(epdgui_args_vector_t &args) {
     Frame_Base *frame = EPDGUI_GetFrame("Frame_FactoryTest");
-    if(frame == NULL) {
+    if (frame == NULL) {
         frame = new Frame_FactoryTest();
         EPDGUI_AddFrame("Frame_FactoryTest", frame);
     }
@@ -52,19 +52,19 @@ void key_factorytest_cb(epdgui_args_vector_t &args) {
     *((int*)(args[0])) = 0;
 }
 
-void key_wifiscan_cb(epdgui_args_vector_t &args) {
-    Frame_Base *frame = EPDGUI_GetFrame("Frame_WifiScan");
-    if(frame == NULL) {
-        frame = new Frame_WifiScan();
-        EPDGUI_AddFrame("Frame_WifiScan", frame);
-    }
-    EPDGUI_PushFrame(frame);
-    *((int*)(args[0])) = 0;
-}
+// void key_wifiscan_cb(epdgui_args_vector_t &args) {
+//     Frame_Base *frame = EPDGUI_GetFrame("Frame_WifiScan");
+//     if (frame == NULL) {
+//         frame = new Frame_WifiScan();
+//         EPDGUI_AddFrame("Frame_WifiScan", frame);
+//     }
+//     EPDGUI_PushFrame(frame);
+//     *((int*)(args[0])) = 0;
+// }
 
 void key_lifegame_cb(epdgui_args_vector_t &args) {
     Frame_Base *frame = EPDGUI_GetFrame("Frame_Lifegame");
-    if(frame == NULL) {
+    if (frame == NULL) {
         frame = new Frame_Lifegame();
         EPDGUI_AddFrame("Frame_Lifegame", frame);
     }
@@ -80,7 +80,7 @@ void key_sdfile_cb(epdgui_args_vector_t &args) {
 
 void key_compare_cb(epdgui_args_vector_t &args) {
     Frame_Base *frame = EPDGUI_GetFrame("Frame_Compare");
-    if(frame == NULL) {
+    if (frame == NULL) {
         frame = new Frame_Compare();
         EPDGUI_AddFrame("Frame_Compare", frame);
     }
@@ -90,7 +90,7 @@ void key_compare_cb(epdgui_args_vector_t &args) {
 
 void key_home_cb(epdgui_args_vector_t &args) {
     Frame_Base *frame = EPDGUI_GetFrame("Frame_Home");
-    if(frame == NULL) {
+    if (frame == NULL) {
         frame = new Frame_Home();
         EPDGUI_AddFrame("Frame_Home", frame);
     }
@@ -111,11 +111,11 @@ Frame_Main::Frame_Main(void): Frame_Base(false) {
     _names->createCanvas(540, 32);
     _names->setTextDatum(CC_DATUM);
     
-    for(int i = 0; i < 4; i++) {
+    for (int i = 0; i < 4; i++) {
         _key[i] = new EPDGUI_Button("Test", 20 + i * 136, 90, KEY_W, KEY_H);
     }
 
-    for(int i = 0; i < 4; i++) {
+    for (int i = 0; i < 4; i++) {
         _key[i + 4] = new EPDGUI_Button("Test", 20 + i * 136, 240, KEY_W, KEY_H);
     }
 
@@ -137,11 +137,11 @@ Frame_Main::Frame_Main(void): Frame_Base(false) {
     _key[kKeyFactoryTest]->AddArgs(EPDGUI_Button::EVENT_RELEASED, 0, (void*)(&_is_run));
     _key[kKeyFactoryTest]->Bind(EPDGUI_Button::EVENT_RELEASED, key_factorytest_cb);
 
-    _key[kKeyWifiScan]->CanvasNormal()->pushImage(0, 0, 92, 92, ImageResource_main_icon_wifi_92x92);
-    *(_key[kKeyWifiScan]->CanvasPressed()) = *(_key[kKeyWifiScan]->CanvasNormal());
-    _key[kKeyWifiScan]->CanvasPressed()->ReverseColor();
-    _key[kKeyWifiScan]->AddArgs(EPDGUI_Button::EVENT_RELEASED, 0, (void*)(&_is_run));
-    _key[kKeyWifiScan]->Bind(EPDGUI_Button::EVENT_RELEASED, key_wifiscan_cb);
+    // _key[kKeyWifiScan]->CanvasNormal()->pushImage(0, 0, 92, 92, ImageResource_main_icon_wifi_92x92);
+    // *(_key[kKeyWifiScan]->CanvasPressed()) = *(_key[kKeyWifiScan]->CanvasNormal());
+    // _key[kKeyWifiScan]->CanvasPressed()->ReverseColor();
+    // _key[kKeyWifiScan]->AddArgs(EPDGUI_Button::EVENT_RELEASED, 0, (void*)(&_is_run));
+    // _key[kKeyWifiScan]->Bind(EPDGUI_Button::EVENT_RELEASED, key_wifiscan_cb);
 
     _key[kKeyLifeGame]->CanvasNormal()->pushImage(0, 0, 92, 92, ImageResource_main_icon_lifegame_92x92);
     *(_key[kKeyLifeGame]->CanvasPressed()) = *(_key[kKeyLifeGame]->CanvasNormal());
@@ -173,22 +173,22 @@ Frame_Main::Frame_Main(void): Frame_Base(false) {
 
 
 Frame_Main::~Frame_Main(void) {
-    for(int i = 0; i < 8; i++) {
+    for (int i = 0; i < 8; i++) {
         delete _key[i];
     }
 }
 
 void Frame_Main::AppName(m5epd_update_mode_t mode) {
-    if(!_names->isRenderExist(20)) {
+    if (!_names->isRenderExist(20)) {
         _names->createRender(20, 26);
     }
     _names->setTextSize(20);
     _names->fillCanvas(0);
 
-    _names->drawString("Wi-Fi", 20 + 46 + 3 * 136, 16);
     _names->drawString("Test", 20 + 46, 16);
     _names->drawString("Settings", 20 + 46 + 136, 16);
     _names->drawString("Keyboard", 20 + 46 + 2 * 136, 16);
+    _names->drawString("Wi-Fi", 20 + 46 + 3 * 136, 16);
     _names->pushCanvas(0, 186, mode);
     
     _names->fillCanvas(0);
@@ -200,7 +200,7 @@ void Frame_Main::AppName(m5epd_update_mode_t mode) {
 }
 
 void Frame_Main::StatusBar(m5epd_update_mode_t mode) {
-    if((millis() - _time) < _next_update_time) {
+    if ((millis() - _time) < _next_update_time) {
         return;
     }
     char buf[20];
@@ -209,21 +209,41 @@ void Frame_Main::StatusBar(m5epd_update_mode_t mode) {
     _bar->setTextDatum(CL_DATUM);
     _bar->drawString("M5Paper", 10, 27);
 
+    // Wi-Fi
+    const uint8_t *kIMGWifiLevel[4] = {
+        NULL,
+        ImageResource_item_icon_wifi_1_32x32,
+        ImageResource_item_icon_wifi_2_32x32,
+        ImageResource_item_icon_wifi_3_32x32
+    };
+    if (WiFi.status() == WL_CONNECTED) {
+        int rssi = WiFi.RSSI();
+        int level = 0;
+        if (rssi > -55) {
+            level = 3;
+        } else if (rssi > -88) {
+            level = 2;
+        } else {
+            level = 1;
+        }
+        _bar->pushImage(134, 8, 32, 32, kIMGWifiLevel[level]);
+    }
+
     // Battery
     _bar->setTextDatum(CR_DATUM);
     _bar->pushImage(498, 8, 32, 32, ImageResource_status_bar_battery_32x32);
     uint32_t vol = M5.getBatteryVoltage();
 
-    if(vol < 3300) {
+    if (vol < 3300) {
         vol = 3300;
-     } else if(vol > 4350) {
+     } else if (vol > 4350) {
         vol = 4350;
     }
     float battery = (float)(vol - 3300) / (float)(4350 - 3300);
-    if(battery <= 0.01) {
+    if (battery <= 0.01) {
         battery = 0.01;
     }
-    if(battery > 1) {
+    if (battery > 1) {
         battery = 1;
     }
     uint8_t px = battery * 25;
@@ -250,7 +270,7 @@ void Frame_Main::StatusBar(m5epd_update_mode_t mode) {
 int Frame_Main::init(epdgui_args_vector_t &args) {
     _is_run = 1;
     M5.EPD.WriteFullGram4bpp(GetWallpaper());
-    for(int i = 0; i < 8; i++) {
+    for (int i = 0; i < 8; i++) {
         EPDGUI_AddObject(_key[i]);
     }
     _time = 0;

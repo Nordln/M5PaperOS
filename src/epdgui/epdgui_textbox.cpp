@@ -136,7 +136,7 @@ void EPDGUI_Textbox::UpdateState(int16_t x, int16_t y) {
 
 void EPDGUI_Textbox::SetState(int16_t state) {
     if (state != _state) {
-        if(state == EVENT_PRESSED) {
+        if (state == EVENT_PRESSED) {
             _textbox_touching_id = _id;
         }
         _state = state;
@@ -158,19 +158,19 @@ void EPDGUI_Textbox::Remove(int16_t idx) {
     while (n < len) {
         last_n = n;
         _canvas->decodeUTF8(buf, &n, len - n);
-        if(cnt == idx) {
+        if (cnt == idx) {
             _data.remove(last_n, n - last_n);
             return;
         }
         cnt++;
     }
-    if(idx == -1) {
+    if (idx == -1) {
         _data.remove(last_n, n - last_n);
     }
 }
 
 void EPDGUI_Textbox::AddText(String text) {
-    if(text.length() == 0) {
+    if (text.length() == 0) {
         return;
     }
     
@@ -181,7 +181,7 @@ void EPDGUI_Textbox::AddText(String text) {
     while (n < len) {
         last_n = n;
         uint16_t uniCode = _canvas->decodeUTF8(buf, &n, len - n);
-        if(uniCode == 0x0008) {
+        if (uniCode == 0x0008) {
             Remove(-1);
          } else {
             _data += text.substring(last_n, n);

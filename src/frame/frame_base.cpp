@@ -2,7 +2,7 @@
 #include "../epdgui/epdgui.h"
 
 Frame_Base::Frame_Base(bool _has_title) {
-    if(_has_title) {
+    if (_has_title) {
         _canvas_title = new M5EPD_Canvas(&M5.EPD);
         _canvas_title->createCanvas(540, 64);
         _canvas_title->drawFastHLine(0, 64, 540, 15);
@@ -16,9 +16,9 @@ Frame_Base::Frame_Base(bool _has_title) {
 }
 
 Frame_Base::~Frame_Base()  {
-    if(_key_exit != NULL)
+    if (_key_exit != NULL)
         delete _key_exit;
-    if(_canvas_title != NULL)
+    if (_canvas_title != NULL)
         delete _canvas_title;
 }
 

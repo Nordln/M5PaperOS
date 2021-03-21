@@ -12,6 +12,7 @@ public:
 
 
 private:
+    EPDGUI_Button *_key_wifi;
     EPDGUI_Button *_key_wallpaper;
     EPDGUI_Button *_key_shutdown;
     EPDGUI_Button *_key_restart;

@@ -8,7 +8,7 @@ void key_textclear_cb(epdgui_args_vector_t &args) {
 
 void key_textsize_plus_cb(epdgui_args_vector_t &args) {
     textsize += 4;
-    if(textsize > 96) {
+    if (textsize > 96) {
         textsize = 96;
     }
     char buf[10];
@@ -20,7 +20,7 @@ void key_textsize_plus_cb(epdgui_args_vector_t &args) {
 
 void key_textsize_minus_cb(epdgui_args_vector_t &args) {
     textsize -= 4;
-    if(textsize < 12) {
+    if (textsize < 12) {
         textsize = 12;
     }
     char buf[10];

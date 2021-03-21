@@ -110,12 +110,12 @@ const char *GetWallpaperName(uint16_t wallpaper_id) {
 
 esp_err_t LoadSetting(void) {
     nvs_handle nvs_arg;
-    NVS_CHECK(nvs_open("Setting", NVS_READONLY, &nvs_arg));
-    NVS_CHECK(nvs_get_u16(nvs_arg, "Wallpaper", &global_wallpaper));
-    NVS_CHECK(nvs_get_u8(nvs_arg, "Timesync", &global_time_synced));
+    NVS_CHECK(nvs_open("settings", NVS_READONLY, &nvs_arg));
+    NVS_CHECK(nvs_get_u16(nvs_arg, "wallpaper", &global_wallpaper));
+    NVS_CHECK(nvs_get_u8(nvs_arg, "time_synced", &global_time_synced));
     nvs_get_i8(nvs_arg, "timezone", &global_timezone);
 
-    if(global_wallpaper >= WALLPAPER_NUM) {
+    if (global_wallpaper >= WALLPAPER_NUM) {
         global_wallpaper = DEFAULT_WALLPAPER;
     }
     
@@ -126,16 +126,17 @@ esp_err_t LoadSetting(void) {
     length = 128;
     NVS_CHECK(nvs_get_str(nvs_arg, "pswd", buf, &length));
     global_wifi_password = String(buf);
-    global_wifi_configed = true;
+    if (!global_wifi_ssid.isEmpty() && !global_wifi_password.isEmpty())
+        global_wifi_configed = true;
     nvs_close(nvs_arg);
     return ESP_OK;
 }
 
 esp_err_t SaveSetting(void) {
     nvs_handle nvs_arg;
-    NVS_CHECK(nvs_open("Setting", NVS_READWRITE, &nvs_arg));
-    NVS_CHECK(nvs_set_u16(nvs_arg, "Wallpaper", global_wallpaper));
-    NVS_CHECK(nvs_set_u8(nvs_arg, "Timesync", global_time_synced));
+    NVS_CHECK(nvs_open("settings", NVS_READWRITE, &nvs_arg));
+    NVS_CHECK(nvs_set_u16(nvs_arg, "wallpaper", global_wallpaper));
+    NVS_CHECK(nvs_set_u8(nvs_arg, "time_synced", global_time_synced));
     NVS_CHECK(nvs_set_i8(nvs_arg, "timezone", global_timezone));
     NVS_CHECK(nvs_set_str(nvs_arg, "ssid", global_wifi_ssid.c_str()));
     NVS_CHECK(nvs_set_str(nvs_arg, "pswd", global_wifi_password.c_str()));
@@ -209,19 +210,19 @@ void __LoadingAnime_32x32(void *pargs) {
     loading.pushCanvas(x, y, UPDATE_MODE_GL16);
     int anime_cnt = 0;
     uint32_t time = 0;
-    while (1) {
-        if(millis() - time > 200) {
+    while (true) {
+        if (millis() - time > 200) {
             time = millis();
             loading.pushImage(0, 0, 32, 32, GetLoadingIMG_32x32(anime_cnt));
             loading.pushCanvas(x, y, UPDATE_MODE_DU4);
             anime_cnt++;
-            if(anime_cnt == 16) {
+            if (anime_cnt == 16) {
                 anime_cnt = 0;
             }
         }
 
         xSemaphoreTake(_xSemaphore_LoadingAnime, portMAX_DELAY);
-        if(_loading_anime_eixt_flag == true) {
+        if (_loading_anime_eixt_flag == true) {
             xSemaphoreGive(_xSemaphore_LoadingAnime);
             break;
         }
@@ -231,7 +232,7 @@ void __LoadingAnime_32x32(void *pargs) {
 }
 
 void LoadingAnime_32x32_Start(uint16_t x, uint16_t y) {
-    if(_xSemaphore_LoadingAnime == NULL) {
+    if (_xSemaphore_LoadingAnime == NULL) {
         _xSemaphore_LoadingAnime = xSemaphoreCreateMutex();
     }
     _loading_anime_eixt_flag = false;

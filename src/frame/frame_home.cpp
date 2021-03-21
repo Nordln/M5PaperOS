@@ -15,12 +15,12 @@ void Frame_Home::InitSwitch(EPDGUI_Switch* sw, String title, String subtitle, co
 void key_home_air_adjust_cb(epdgui_args_vector_t &args) {
     int operation = ((EPDGUI_Button*)(args[0]))->GetCustomString().toInt();
     EPDGUI_Switch *sw = ((EPDGUI_Switch*)(args[1]));
-    if(sw->getState() == 0) {
+    if (sw->getState() == 0) {
         return;
     }
     int temp = sw->GetCustomString().toInt();
     char buf[10];
-    if(operation == 1) {
+    if (operation == 1) {
         temp++;
         
      } else {

@@ -44,7 +44,7 @@ Frame_FileIndex::Frame_FileIndex(String path) {
 
         exitbtn("/..");
         String subpath = path;
-        if(path.length() > 20) {
+        if (path.length() > 20) {
             subpath = path.substring(0, 20) + "...";
         }
         _canvas_title->drawString("SD" + subpath, 540 - 15, 34);
@@ -78,8 +78,8 @@ void Frame_FileIndex::listDir(fs::FS &fs, const char *dirname) {
         file = root.openNextFile();
     }
 
-    for(int n = 0; n < floders.size(); n++) {
-        if(_key_files.size() > MAX_BTN_NUM) {
+    for (int n = 0; n < floders.size(); n++) {
+        if (_key_files.size() > MAX_BTN_NUM) {
             break;
         }
         File file = floders[n];
@@ -88,7 +88,7 @@ void Frame_FileIndex::listDir(fs::FS &fs, const char *dirname) {
 
         String filename(file.name());
         filename = filename.substring(filename.lastIndexOf("/"));
-        if(filename.length() > 19) {
+        if (filename.length() > 19) {
             filename = filename.substring(0, 19) + "...";
         }
         btn->CanvasNormal()->fillCanvas(0);
@@ -109,8 +109,8 @@ void Frame_FileIndex::listDir(fs::FS &fs, const char *dirname) {
         btn->Bind(EPDGUI_Button::EVENT_RELEASED, key_fileindex_floder_cb);
     }
 
-    for(int n = 0; n < files.size(); n++) {
-        if(_key_files.size() > MAX_BTN_NUM) {
+    for (int n = 0; n < files.size(); n++) {
+        if (_key_files.size() > MAX_BTN_NUM) {
             break;
         }
         File file = files[n];
@@ -119,7 +119,7 @@ void Frame_FileIndex::listDir(fs::FS &fs, const char *dirname) {
 
         String filename(file.name());
         filename = filename.substring(filename.lastIndexOf("/"));
-        if(filename.length() > 19) {
+        if (filename.length() > 19) {
             filename = filename.substring(0, 19) + "...";
         }
         btn->CanvasNormal()->fillCanvas(0);
@@ -132,12 +132,12 @@ void Frame_FileIndex::listDir(fs::FS &fs, const char *dirname) {
         btn->CanvasNormal()->setTextDatum(CR_DATUM);
 
         String suffix = filename.substring(filename.lastIndexOf("."));
-        if(suffix.indexOf("txt") >= 0) {
+        if (suffix.indexOf("txt") >= 0) {
             btn->CanvasNormal()->pushImage(15, 14, 32, 32, ImageResource_item_icon_file_text_32x32);
             btn->AddArgs(EPDGUI_Button::EVENT_RELEASED, 0, btn);
             btn->AddArgs(EPDGUI_Button::EVENT_RELEASED, 1, (void*)(&_is_run));
             btn->Bind(EPDGUI_Button::EVENT_RELEASED, key_fileindex_text_cb);
-         } else if((suffix.indexOf("bmp") >= 0) 
+         } else if ((suffix.indexOf("bmp") >= 0) 
         || (suffix.indexOf("BMP") >= 0) 
         || (suffix.indexOf("png") >= 0)
         || (suffix.indexOf("PNG") >= 0)
@@ -161,7 +161,7 @@ void Frame_FileIndex::listDir(fs::FS &fs, const char *dirname) {
 }
 
 Frame_FileIndex::~Frame_FileIndex(void) {
-    for(int i = 0; i < _key_files.size(); i++) {
+    for (int i = 0; i < _key_files.size(); i++) {
         delete _key_files[i];
     }
 }
@@ -169,7 +169,7 @@ Frame_FileIndex::~Frame_FileIndex(void) {
 int Frame_FileIndex::init(epdgui_args_vector_t &args) {
     _is_run = 1;
 
-    if(_key_files.size() == 0) {
+    if (_key_files.size() == 0) {
         listDir(SD, _path.c_str());
     }
     
@@ -177,7 +177,7 @@ int Frame_FileIndex::init(epdgui_args_vector_t &args) {
     _canvas_title->pushCanvas(0, 8, UPDATE_MODE_NONE);
     EPDGUI_AddObject(_key_exit);
 
-    for(int i = 0; i < _key_files.size(); i++) {
+    for (int i = 0; i < _key_files.size(); i++) {
         EPDGUI_AddObject(_key_files[i]);
     }
 

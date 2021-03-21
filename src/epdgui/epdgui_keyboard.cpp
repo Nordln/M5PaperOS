@@ -55,13 +55,13 @@ EPDGUI_Keyboard::EPDGUI_Keyboard(uint32_t style): EPDGUI_Base() {
     const uint16_t kThirdLineY = kSecondLineY + 64;
     const uint16_t k4thLineY = kThirdLineY + 64;
 
-    for(int i = 0; i < 10; i++) {
+    for (int i = 0; i < 10; i++) {
         _btn[i] = new EPDGUI_Button(kKeyAlphaMapLowerCase[i], kBaseX + (kKeyInterval + kKeyWidth) * i, kFirstLineY, kKeyWidth, kKeyHeight);
     }
-    for(int i = 10; i < 19; i++) {
+    for (int i = 10; i < 19; i++) {
         _btn[i] = new EPDGUI_Button(kKeyAlphaMapLowerCase[i], kBaseX + 28 + (kKeyInterval + kKeyWidth) * (i - 10), kSecondLineY, kKeyWidth, kKeyHeight);
     }
-    for(int i = 19; i < 26; i++) {
+    for (int i = 19; i < 26; i++) {
         _btn[i] = new EPDGUI_Button(kKeyAlphaMapLowerCase[i], kBaseX + 80 + (kKeyInterval + kKeyWidth) * (i - 19), kThirdLineY, kKeyWidth, kKeyHeight);
     }
 
@@ -72,9 +72,9 @@ EPDGUI_Keyboard::EPDGUI_Keyboard(uint32_t style): EPDGUI_Base() {
     _btn[kKeyBackspace]->CanvasPressed()->ReverseColor();
 
     _btn[kKeySpace] = new EPDGUI_Button("Space", kBaseX + 132, k4thLineY, 244, kKeyHeight);
-    if(style & STYLE_INPUTMODE_NORMALTEXT)
+    if (style & STYLE_INPUTMODE_NORMALTEXT)
         _btn[kKeyWrap] = new EPDGUI_Button("Wrap", kBaseX + 512 - 128, k4thLineY, 128, kKeyHeight);
-    else if(style & STYLE_INPUTMODE_NEEDCONFIRM)
+    else if (style & STYLE_INPUTMODE_NEEDCONFIRM)
         _btn[kKeyWrap] = new EPDGUI_Button("Confirm", kBaseX + 512 - 128, k4thLineY, 128, kKeyHeight);
 
     // function key
@@ -87,7 +87,7 @@ EPDGUI_Keyboard::EPDGUI_Keyboard(uint32_t style): EPDGUI_Base() {
     _sw[kSWNumber]->SetLabel(0, "123");
     _sw[kSWNumber]->SetLabel(1, "Abc");
 
-    for(int i = 0; i < 29; i++) {
+    for (int i = 0; i < 29; i++) {
         _key[i] = _btn[i];
     }
     _key[kKeyCase] = _sw[kSWCase];
@@ -97,30 +97,30 @@ EPDGUI_Keyboard::EPDGUI_Keyboard(uint32_t style): EPDGUI_Base() {
 }
 
 EPDGUI_Keyboard::~EPDGUI_Keyboard() {
-    for(int i = 0; i < 29; i++) {
+    for (int i = 0; i < 29; i++) {
         delete _btn[i];
     }
-    for(int i = 0; i < 2; i++) {
+    for (int i = 0; i < 2; i++) {
         delete _sw[i];
     }
 }
 
 void EPDGUI_Keyboard::Draw(m5epd_update_mode_t mode) {
-    if(_ishide) {
+    if (_ishide) {
         return;
     }
 
-    for(int i = 0; i < 31; i++) {
+    for (int i = 0; i < 31; i++) {
         _key[i]->Draw(mode);
     }
 }
 
 void EPDGUI_Keyboard::Draw(M5EPD_Canvas* canvas) {
-    if(_ishide) {
+    if (_ishide) {
         return;
     }
 
-    for(int i = 0; i < 31; i++) {
+    for (int i = 0; i < 31; i++) {
         _key[i]->Draw(canvas);
     }
 }
@@ -130,16 +130,16 @@ void EPDGUI_Keyboard::Bind(int16_t state, void (* func_cb)(epdgui_args_vector_t&
 }
 
 void EPDGUI_Keyboard::UpdateState(int16_t x, int16_t y) {
-    if(!_isenable) {
+    if (!_isenable) {
         return;
     }
     // log_d("UpdateState %d, %d", x, y);
-    for(int i = 0; i < 31; i++) {
+    for (int i = 0; i < 31; i++) {
         bool keypressed = _key[i]->isInBox(x, y);
         _key[i]->UpdateState(x, y);
-        if(keypressed) {
-            if(i < 26) {
-                switch(_layout) {
+        if (keypressed) {
+            if (i < 26) {
+                switch (_layout) {
                     case kLayoutLowerAlpha:
                         _data += kKeyAlphaMapLowerCase[i];
                         break;
@@ -154,7 +154,7 @@ void EPDGUI_Keyboard::UpdateState(int16_t x, int16_t y) {
                         break;
                 }
             }
-            switch(i) {
+            switch (i) {
                 case kKeyBackspace:
                     _data += "\u0008";
                     break;
@@ -165,14 +165,14 @@ void EPDGUI_Keyboard::UpdateState(int16_t x, int16_t y) {
                     _data += "\n";
                     break;
                 case kKeyCase:
-                    if(_layout == kLayoutNumber || _layout == kLayoutSymbol) {
-                        if(_sw[kSWCase]->getState() == 1) {
-                            for(int j = 0; j < 26; j++) {
+                    if (_layout == kLayoutNumber || _layout == kLayoutSymbol) {
+                        if (_sw[kSWCase]->getState() == 1) {
+                            for (int j = 0; j < 26; j++) {
                                 _btn[j]->setLabel(kKeyAlphaMapNumber[j]);
                                 _layout = kLayoutNumber;
                             }
                          } else {
-                            for(int j = 0; j < 26; j++) {
+                            for (int j = 0; j < 26; j++) {
                                 _btn[j]->setLabel(kKeyAlphaMapSymbol[j]);
                                 _layout = kLayoutSymbol;
                             }
@@ -181,13 +181,13 @@ void EPDGUI_Keyboard::UpdateState(int16_t x, int16_t y) {
                         Draw(UPDATE_MODE_NONE);
                         M5.EPD.UpdateFull(UPDATE_MODE_GL16);
                      } else {
-                        if(_sw[kSWCase]->getState() == 1) {
-                            for(int j = 0; j < 26; j++) {
+                        if (_sw[kSWCase]->getState() == 1) {
+                            for (int j = 0; j < 26; j++) {
                                 _btn[j]->setLabel(kKeyAlphaMapLowerCase[j]);
                                 _layout = kLayoutLowerAlpha;
                             }
                          } else {
-                            for(int j = 0; j < 26; j++) {
+                            for (int j = 0; j < 26; j++) {
                                 _btn[j]->setLabel(kKeyAlphaMapUpperCase[j]);
                                 _layout = kLayoutUpperAlpha;
                             }
@@ -198,7 +198,7 @@ void EPDGUI_Keyboard::UpdateState(int16_t x, int16_t y) {
                     }
                     break;
                 case kKeyNumber:
-                    if(_sw[kSWNumber]->getState() == 1) {
+                    if (_sw[kSWNumber]->getState() == 1) {
                         _sw[kSWCase]->setState(0);
                         _sw[kSWCase]->Canvas(0)->fillCanvas(0);
                         _sw[kSWCase]->Canvas(1)->fillCanvas(0);
@@ -208,7 +208,7 @@ void EPDGUI_Keyboard::UpdateState(int16_t x, int16_t y) {
                         _sw[kSWCase]->Canvas(1)->pushImage(_sw[kSWCase]->getW() / 2 - 16, _sw[kSWCase]->getH() / 2 - 16, 32, 32, ImageResource_upper_32x32);
                         _sw[kSWCase]->Canvas(1)->ReverseColor();
 
-                        for(int j = 0; j < 26; j++) {
+                        for (int j = 0; j < 26; j++) {
                             _btn[j]->setLabel(kKeyAlphaMapLowerCase[j]);
                             _layout = kLayoutLowerAlpha;
                         }
@@ -217,7 +217,7 @@ void EPDGUI_Keyboard::UpdateState(int16_t x, int16_t y) {
                         _sw[kSWCase]->SetLabel(0, "#+-");
                         _sw[kSWCase]->SetLabel(1, "123");
 
-                        for(int j = 0; j < 26; j++) {
+                        for (int j = 0; j < 26; j++) {
                             _btn[j]->setLabel(kKeyAlphaMapNumber[j]);
                             _layout = kLayoutNumber;
                         }

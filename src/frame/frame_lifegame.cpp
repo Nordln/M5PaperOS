@@ -36,14 +36,14 @@ void LifeGame_RandomCell() {
 
 uint8_t LifeGame_Count3x3_0(uint8_t x, uint8_t y) {
     uint8_t count = 0;
-    for(int j = y - 1; j < y + 2; j++) {
-        for(int i = x - 1; i < x + 2; i++) {
-            if(lifegame_cells_0.readPixel(i, j)) {
+    for (int j = y - 1; j < y + 2; j++) {
+        for (int i = x - 1; i < x + 2; i++) {
+            if (lifegame_cells_0.readPixel(i, j)) {
                 count++;
             }
         }
     }
-    if(lifegame_cells_0.readPixel(x, y)) {
+    if (lifegame_cells_0.readPixel(x, y)) {
         count--;
     }
     return count;
@@ -51,14 +51,14 @@ uint8_t LifeGame_Count3x3_0(uint8_t x, uint8_t y) {
 
 uint8_t LifeGame_Count3x3_1(uint8_t x, uint8_t y) {
     uint8_t count = 0;
-    for(int j = y - 1; j < y + 2; j++) {
-        for(int i = x - 1; i < x + 2; i++) {
-            if(lifegame_cells_1.readPixel(i, j)) {
+    for (int j = y - 1; j < y + 2; j++) {
+        for (int i = x - 1; i < x + 2; i++) {
+            if (lifegame_cells_1.readPixel(i, j)) {
                 count++;
             }
         }
     }
-    if(lifegame_cells_1.readPixel(x, y)) {
+    if (lifegame_cells_1.readPixel(x, y)) {
         count--;
     }
     return count;
@@ -66,16 +66,16 @@ uint8_t LifeGame_Count3x3_1(uint8_t x, uint8_t y) {
 
 void LifeGame_CellProcess_0(uint8_t x, uint8_t y) {
     uint8_t count = LifeGame_Count3x3_0(x, y);
-    if(lifegame_cells_0.readPixel(x, y)) {
+    if (lifegame_cells_0.readPixel(x, y)) {
         //dead
-        if(count < 2 || count > 3) {
+        if (count < 2 || count > 3) {
             lifegame_cells_1.drawPixel(x, y, 0);
          } else {
             lifegame_cells_1.drawPixel(x, y, 15);
         }
      } else {
         //new life
-        if(count == 3) {
+        if (count == 3) {
             lifegame_cells_1.drawPixel(x, y, 15);
          } else {
             lifegame_cells_1.drawPixel(x, y, 0);
@@ -85,16 +85,16 @@ void LifeGame_CellProcess_0(uint8_t x, uint8_t y) {
 
 void LifeGame_CellProcess_1(uint8_t x, uint8_t y) {
     uint8_t count = LifeGame_Count3x3_1(x, y);
-    if(lifegame_cells_1.readPixel(x, y)) {
+    if (lifegame_cells_1.readPixel(x, y)) {
         //dead
-        if(count < 2 || count > 3) {
+        if (count < 2 || count > 3) {
             lifegame_cells_0.drawPixel(x, y, 0);
          } else {
             lifegame_cells_0.drawPixel(x, y, 15);
         }
      } else {
         //new life
-        if(count == 3) {
+        if (count == 3) {
             lifegame_cells_0.drawPixel(x, y, 15);
          } else {
             lifegame_cells_0.drawPixel(x, y, 0);
@@ -103,7 +103,7 @@ void LifeGame_CellProcess_1(uint8_t x, uint8_t y) {
 }
 
 void LifeGame_RoundProcess() {
-    if(lifegame_cells_flag == 0) {
+    if (lifegame_cells_flag == 0) {
         for (int y = 1; y < CELL_Y - 1; y++) {
             for (int x = 1; x < CELL_X - 1; x++) {
                 LifeGame_CellProcess_0(x, y);
@@ -129,11 +129,11 @@ void LifeGame_NextGen(void *pvParameters) {
 
 int Frame_Lifegame::run() {
     M5.update();
-    if(M5.BtnP.wasReleased()) {
+    if (M5.BtnP.wasReleased()) {
         LifeGame_RandomCell();
     }
     xTaskCreatePinnedToCore(LifeGame_NextGen, "LifeGame_NextGen", 4096, NULL, 1, NULL, 0);
-    if(lifegame_cells_flag == 0) {
+    if (lifegame_cells_flag == 0) {
         lifegame_canvas_1.pushCanvas(0, 72, UPDATE_MODE_DU4);
      } else {
         lifegame_canvas_0.pushCanvas(0, 72, UPDATE_MODE_DU4);

@@ -24,19 +24,19 @@ void EPDGUI_AddObject(EPDGUI_Base* object) {
 }
 
 void EPDGUI_Draw(m5epd_update_mode_t mode) {
-    for(std::list<EPDGUI_Base*>::iterator p = epdgui_object_list.begin(); p != epdgui_object_list.end(); p++) {
+    for (std::list<EPDGUI_Base*>::iterator p = epdgui_object_list.begin(); p != epdgui_object_list.end(); p++) {
         (*p)->Draw(mode);
     }
 }
 
 void EPDGUI_Process(void) {
-    for(std::list<EPDGUI_Base*>::iterator p = epdgui_object_list.begin(); p != epdgui_object_list.end(); p++) {
+    for (std::list<EPDGUI_Base*>::iterator p = epdgui_object_list.begin(); p != epdgui_object_list.end(); p++) {
         (*p)->UpdateState(-1, -1);
     }
 }
 
 void EPDGUI_Process(int16_t x, int16_t y) {
-    for(std::list<EPDGUI_Base*>::iterator p = epdgui_object_list.begin(); p != epdgui_object_list.end(); p++) {
+    for (std::list<EPDGUI_Base*>::iterator p = epdgui_object_list.begin(); p != epdgui_object_list.end(); p++) {
         // log_d("%d, %d -> %d, %d, %d, %d", x, y, (*p)->getX(), (*p)->getY(), (*p)->getRX(), (*p)->getBY());
         (*p)->UpdateState(x, y);
     }
@@ -49,10 +49,10 @@ void EPDGUI_Clear(void) {
 void EPDGUI_Run(Frame_Base* frame) {
     uint32_t last_active_time = 0;
 
-    if(frame->isRun() == 0) {
+    if (frame->isRun() == 0) {
         frame->exit();
         log_d("Exit %s", frame->GetFrameName().c_str());
-        if(wait_for_delete != NULL) {
+        if (wait_for_delete != NULL) {
             delete wait_for_delete;
             wait_for_delete = NULL;
         }
@@ -60,7 +60,7 @@ void EPDGUI_Run(Frame_Base* frame) {
     }
 
     EPDGUI_Draw(UPDATE_MODE_NONE);
-    if((frame->GetFrameID() == 1) || (frame_switch_count > 3)) {
+    if ((frame->GetFrameID() == 1) || (frame_switch_count > 3)) {
         frame_switch_count = 0;
         M5.EPD.UpdateFull(UPDATE_MODE_GC16);
      } else {
@@ -68,12 +68,12 @@ void EPDGUI_Run(Frame_Base* frame) {
         frame_switch_count++;
     }
 
-    while (1) {
-        if((frame->isRun() == 0) || (frame->run() == 0)) {
+    while (true) {
+        if ((frame->isRun() == 0) || (frame->run() == 0)) {
             frame->exit();
             // M5.EPD.Clear();
             log_d("Exit %s", frame->GetFrameName().c_str());
-            if(wait_for_delete != NULL) {
+            if (wait_for_delete != NULL) {
                 log_d("delete %s", wait_for_delete->GetFrameName().c_str());
                 delete wait_for_delete;
                 wait_for_delete = NULL;
@@ -84,10 +84,10 @@ void EPDGUI_Run(Frame_Base* frame) {
         if (M5.TP.avaliable()) {
             M5.TP.update();
             bool is_finger_up = M5.TP.isFingerUp();
-            if(is_finger_up || (_last_pos_x != M5.TP.readFingerX(0)) || (_last_pos_y != M5.TP.readFingerY(0))) {
+            if (is_finger_up || (_last_pos_x != M5.TP.readFingerX(0)) || (_last_pos_y != M5.TP.readFingerY(0))) {
                 _last_pos_x = M5.TP.readFingerX(0);
                 _last_pos_y = M5.TP.readFingerY(0);
-                if(is_finger_up) {
+                if (is_finger_up) {
                     EPDGUI_Process();
                     last_active_time = millis();
                  } else {
@@ -100,10 +100,10 @@ void EPDGUI_Run(Frame_Base* frame) {
             M5.TP.flush();
         }
 
-        if((last_active_time != 0) && (millis() - last_active_time > 2000)) {
-            if(M5.EPD.UpdateCount() > 4) {
+        if ((last_active_time != 0) && (millis() - last_active_time > 2000)) {
+            if (M5.EPD.UpdateCount() > 4) {
                 M5.EPD.ResetUpdateCount();
-                if(_is_auto_update) {
+                if (_is_auto_update) {
                     M5.EPD.UpdateFull(UPDATE_MODE_GL16);
                 }
             }
@@ -113,7 +113,7 @@ void EPDGUI_Run(Frame_Base* frame) {
 }
 
 void EPDGUI_MainLoop(void) {
-    if((!frame_stack.empty()) && (frame_stack.top() != NULL)) {
+    if ((!frame_stack.empty()) && (frame_stack.top() != NULL)) {
         Frame_Base *frame = frame_stack.top();
         log_d("Run %s", frame->GetFrameName().c_str());
         EPDGUI_Clear();
@@ -130,10 +130,10 @@ void EPDGUI_AddFrame(String name, Frame_Base* frame) {
 }
 
 void EPDGUI_AddFrameArg(String name, int n, void* arg) {
-    if(frame_map.count(name) == 0) {
+    if (frame_map.count(name) == 0) {
         return;
     }
-    if(frame_map[name].args.size() > n) {
+    if (frame_map[name].args.size() > n) {
         frame_map[name].args[n] = arg;
      } else {
         frame_map[name].args.push_back(arg);
@@ -142,7 +142,7 @@ void EPDGUI_AddFrameArg(String name, int n, void* arg) {
 }
 
 Frame_Base* EPDGUI_GetFrame(String name) {
-    if(frame_map.count(name) > 0) {
+    if (frame_map.count(name) > 0) {
         return frame_map[name].frame;
     }
     return NULL;
@@ -153,14 +153,14 @@ void EPDGUI_PushFrame(Frame_Base* frame) {
 }
 
 void EPDGUI_PopFrame(bool isDelete) {
-    if(isDelete) {
+    if (isDelete) {
         wait_for_delete = frame_stack.top();
     }
     frame_stack.pop();
 }
 
 void EPDGUI_OverwriteFrame(Frame_Base* frame) {
-    while(!frame_stack.empty()) {
+    while (!frame_stack.empty()) {
         frame_stack.pop();
     }
     frame_stack.push(frame);

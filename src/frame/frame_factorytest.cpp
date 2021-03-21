@@ -90,7 +90,7 @@ Frame_FactoryTest::~Frame_FactoryTest(void) {
 void Frame_FactoryTest::drawItem(uint16_t flag, const char* str, int y) {
     String prefix_pass("[PASS] ");
     String prefix_none("");
-    if(_pass_flag & flag) {
+    if (_pass_flag & flag) {
         _canvas_base->drawString(prefix_pass + str, POS_LX, y);
      } else {
         _canvas_base->drawString(str, POS_LX, y);
@@ -157,7 +157,7 @@ void Frame_FactoryTest::scan(String *ssid, int32_t *rssi) {
     WiFi.scanNetworks(true);
 
     int wifi_num;
-    while (1) {
+    while (true) {
         wifi_num = WiFi.scanComplete();
         if (wifi_num >= 0) {
             break;
@@ -207,7 +207,7 @@ int Frame_FactoryTest::run() {
         ispressed = true;
     }
     buf[ptr] = '\0';
-    if(ptr == 0) {
+    if (ptr == 0) {
         strcpy(buf, "Waiting...");
     }
     if (ispressed) {
@@ -244,7 +244,7 @@ int Frame_FactoryTest::run() {
 
         // SHT30
         M5.SHT30.UpdateData();
-        if(M5.SHT30.GetError() == 0) {
+        if (M5.SHT30.GetError() == 0) {
             float ctemp = M5.SHT30.GetTemperature();
             float chumi = M5.SHT30.GetRelHumidity();
 
@@ -348,8 +348,8 @@ int Frame_FactoryTest::run() {
     }
     
     bool update_flag = false;
-    if(temp != pass_flag) {
-        if(pass_flag != _pass_flag) {
+    if (temp != pass_flag) {
+        if (pass_flag != _pass_flag) {
             update_flag = true;
         }
         _pass_flag = pass_flag;
@@ -360,7 +360,7 @@ int Frame_FactoryTest::run() {
         drawItem(UPDATE_MODE_GL16);
         update_flag = true;
     }
-    if(update_flag) {
+    if (update_flag) {
         drawPassCount(UPDATE_MODE_GL16);
     }
 

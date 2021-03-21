@@ -37,23 +37,23 @@ void Frame_PictureViewer::err(String info) {
 }
 
 int Frame_PictureViewer::run() {
-    if(_is_first) {
+    if (_is_first) {
         _is_first = false;
         LoadingAnime_32x32_Start(254, 500);
         String suffix = _pic_path.substring(_pic_path.lastIndexOf("."));
-        if((suffix.indexOf("bmp") >= 0) || (suffix.indexOf("BMP") >= 0)) {
+        if ((suffix.indexOf("bmp") >= 0) || (suffix.indexOf("BMP") >= 0)) {
             bool ret = _canvas_picture->drawBmpFile(SD, _pic_path.c_str(), 0, 0);
-            if(ret == 0) {
+            if (ret == 0) {
                 err("Error opening " + _pic_path.substring(_pic_path.lastIndexOf("/")));
             }
          } else if ((suffix.indexOf("png") >= 0) || (suffix.indexOf("PNG") >= 0)) {
             bool ret = _canvas_picture->drawPngFile(SD, _pic_path.c_str());
-            if(ret == 0) {
+            if (ret == 0) {
                 err("Error opening " + _pic_path.substring(_pic_path.lastIndexOf("/")));
             }
          } else if ((suffix.indexOf("jpg") >= 0) || (suffix.indexOf("JPG") >= 0)) {
             bool ret = _canvas_picture->drawJpgFile(SD, _pic_path.c_str());
-            if(ret == 0) {
+            if (ret == 0) {
                 err("Error opening " + _pic_path.substring(_pic_path.lastIndexOf("/")));
             }
         }
