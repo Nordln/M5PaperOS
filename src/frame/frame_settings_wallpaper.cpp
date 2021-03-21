@@ -16,7 +16,7 @@ Frame_Settings_Wallpaper::Frame_Settings_Wallpaper(void) {
         _sw_wallpapers[i]->SetLabel(1, GetWallpaperName(i));
         _sw_wallpapers[i]->Canvas(1)->ReverseColor();
         _sw_wallpapers[i]->SetID(i);
-        _sw_wallpapers[i]->AddArgs(1, 0, (void*)(_sw_wallpapers[i]->GetID_P()));
+        _sw_wallpapers[i]->AddArgs(EPDGUI_Switch::EVENT_PRESSED, 0, (void*)(_sw_wallpapers[i]->GetID_P()));
         _sw_wallpapers[i]->Bind(1, &sw_wallpapers_cb);
     }
     _sw_wallpapers[GetWallpaperID()]->setState(1);

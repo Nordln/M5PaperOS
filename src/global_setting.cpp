@@ -54,7 +54,7 @@ uint16_t global_reader_textsize = 32;
 uint8_t global_time_synced = false;
 uint8_t global_ttf_file_loaded = false;
 uint8_t global_init_status = 0xFF;
-int8_t global_timezone = 8;
+int8_t global_timezone = 0;
 
 
 int8_t GetTimeZone(void) {

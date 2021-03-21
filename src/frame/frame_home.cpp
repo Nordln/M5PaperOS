@@ -136,22 +136,22 @@ Frame_Home::Frame_Home(void) {
     _sw_air_2->Canvas(0)->pushImage(68, 12, 92, 92, ImageResource_home_icon_conditioner_off_92x92);
     _sw_air_2->Canvas(1)->pushImage(68, 12, 92, 92, ImageResource_home_icon_conditioner_on_92x92);
 
-    _sw_air_1->AddArgs(0, 0, _key_air_1_plus);
-    _sw_air_1->AddArgs(0, 1, _key_air_1_minus);
-    _sw_air_1->AddArgs(0, 2, _sw_air_1);
+    _sw_air_1->AddArgs(EPDGUI_Switch::EVENT_NONE, 0, _key_air_1_plus);
+    _sw_air_1->AddArgs(EPDGUI_Switch::EVENT_NONE, 1, _key_air_1_minus);
+    _sw_air_1->AddArgs(EPDGUI_Switch::EVENT_NONE, 2, _sw_air_1);
     _sw_air_1->Bind(0, key_home_air_state0_cb);
-    _sw_air_1->AddArgs(1, 0, _key_air_1_plus);
-    _sw_air_1->AddArgs(1, 1, _key_air_1_minus);
-    _sw_air_1->AddArgs(1, 2, _sw_air_1);
+    _sw_air_1->AddArgs(EPDGUI_Switch::EVENT_PRESSED, 0, _key_air_1_plus);
+    _sw_air_1->AddArgs(EPDGUI_Switch::EVENT_PRESSED, 1, _key_air_1_minus);
+    _sw_air_1->AddArgs(EPDGUI_Switch::EVENT_PRESSED, 2, _sw_air_1);
     _sw_air_1->Bind(1, key_home_air_state1_cb);
 
-    _sw_air_2->AddArgs(0, 0, _key_air_2_plus);
-    _sw_air_2->AddArgs(0, 1, _key_air_2_minus);
-    _sw_air_2->AddArgs(0, 2, _sw_air_2);
+    _sw_air_2->AddArgs(EPDGUI_Switch::EVENT_NONE, 0, _key_air_2_plus);
+    _sw_air_2->AddArgs(EPDGUI_Switch::EVENT_NONE, 1, _key_air_2_minus);
+    _sw_air_2->AddArgs(EPDGUI_Switch::EVENT_NONE, 2, _sw_air_2);
     _sw_air_2->Bind(0, key_home_air_state0_cb);
-    _sw_air_2->AddArgs(1, 0, _key_air_2_plus);
-    _sw_air_2->AddArgs(1, 1, _key_air_2_minus);
-    _sw_air_2->AddArgs(1, 2, _sw_air_2);
+    _sw_air_2->AddArgs(EPDGUI_Switch::EVENT_PRESSED, 0, _key_air_2_plus);
+    _sw_air_2->AddArgs(EPDGUI_Switch::EVENT_PRESSED, 1, _key_air_2_minus);
+    _sw_air_2->AddArgs(EPDGUI_Switch::EVENT_PRESSED, 2, _sw_air_2);
     _sw_air_2->Bind(1, key_home_air_state1_cb);
 
     exitbtn("Home");

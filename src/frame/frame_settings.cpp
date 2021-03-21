@@ -27,7 +27,7 @@ void key_restart_cb(epdgui_args_vector_t &args) {
     esp_restart();
 }
 
-void key_wifi2_cb(epdgui_args_vector_t &args) {
+void key_wifi_cb(epdgui_args_vector_t &args) {
     Frame_Base *frame = EPDGUI_GetFrame("Frame_Settings_Wifi");
     if (frame == NULL) {
         frame = new Frame_Settings_Wifi();
@@ -174,7 +174,7 @@ Frame_Settings::Frame_Settings(void) {
     _key_exit->Bind(EPDGUI_Button::EVENT_RELEASED, &Frame_Base::exit_cb);
 
     _key_wifi->AddArgs(EPDGUI_Button::EVENT_RELEASED, 0, (void*)(&_is_run));
-    _key_wifi->Bind(EPDGUI_Button::EVENT_RELEASED, &key_wifi2_cb);
+    _key_wifi->Bind(EPDGUI_Button::EVENT_RELEASED, &key_wifi_cb);
 
     _key_wallpaper->AddArgs(EPDGUI_Button::EVENT_RELEASED, 0, (void*)(&_is_run));
     _key_wallpaper->Bind(EPDGUI_Button::EVENT_RELEASED, &key_wallpaper_cb);

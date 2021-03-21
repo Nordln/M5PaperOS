@@ -7,7 +7,7 @@
 bool _update_flag = false;
 EPDGUI_Button *_connect_key = NULL;
 
-void key_wifi_cb(epdgui_args_vector_t &args) {
+void key_wifi_network_cb(epdgui_args_vector_t &args) {
     if (((EPDGUI_Button*)(args[0]))->GetCustomString() == "_$refresh$_") {
         _update_flag = true;
      } else {
@@ -33,7 +33,7 @@ Frame_Settings_Wifi::Frame_Settings_Wifi(void) {
         _key_wifi[i]->CanvasNormal()->setTextColor(15);
         _key_wifi[i]->AddArgs(EPDGUI_Button::EVENT_RELEASED, 0, _key_wifi[i]);
         _key_wifi[i]->AddArgs(EPDGUI_Button::EVENT_RELEASED, 1, (void*)(&_is_run));
-        _key_wifi[i]->Bind(EPDGUI_Button::EVENT_RELEASED, key_wifi_cb);
+        _key_wifi[i]->Bind(EPDGUI_Button::EVENT_RELEASED, key_wifi_network_cb);
     }
 
     exitbtn("Settings");
